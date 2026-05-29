@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { C } from "./constants/theme";
 import { DEBRIS_FIELD } from "./constants/debris";
 import { useSatellites } from "./hooks/useSatellites";
@@ -24,6 +24,9 @@ export default function App() {
   const { sats }       = useSatellites(booted);
   const { telHistory } = useTelemetryHistory(booted);
 
+  // ✅ AQUI — fora do return
+  const handleBoot = useCallback(() => setBooted(true), []);
+
   return (
     <div style={{ minHeight: "100vh", background: C.bg, color: C.text, overflowX: "hidden", fontFamily: "'Share Tech Mono',monospace" }}>
       <style>{`
@@ -36,7 +39,8 @@ export default function App() {
       <Particles />
       <Scanlines />
       <AnimatePresence>
-        {!booted && <Boot onDone={() => setBooted(true)} />}
+        {/* ✅ SEM o useCallback aqui dentro */}
+        {!booted && <Boot onDone={handleBoot} />}
       </AnimatePresence>
       {booted && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
