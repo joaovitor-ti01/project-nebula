@@ -24,7 +24,7 @@ export default function App() {
   const { sats }       = useSatellites(booted);
   const { telHistory } = useTelemetryHistory(booted);
 
-  // ✅ AQUI — fora do return
+  // Mantendo o callback isolado para performance
   const handleBoot = useCallback(() => setBooted(true), []);
 
   return (
@@ -39,20 +39,21 @@ export default function App() {
       <Particles />
       <Scanlines />
       <AnimatePresence>
-        {/* ✅ SEM o useCallback aqui dentro */}
         {!booted && <Boot onDone={handleBoot} />}
       </AnimatePresence>
       {booted && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+          {/* O componente Nav recebe o estado da aba atual */}
           <Nav active={tab} setActive={setTab} />
           <AnimatePresence mode="wait">
             <motion.div key={tab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .3 }}>
-              {tab === "CONTROL"    && <ControlPage   sats={sats} telHistory={telHistory} debris={DEBRIS_FIELD} onSelectSat={(s: any) => { setSelected(s); setTab("TELEMETRY"); }} />}
-              {tab === "TELEMETRY"  && <TelemetryPage sats={sats} selectedSat={selectedSat} onSelectSat={setSelected} />}
-              {tab === "DEBRIS"     && <DebrisPage    debris={DEBRIS_FIELD} />}
-              {tab === "AI ENGINE"  && <AIEnginePage  sats={sats} />}
-              {tab === "LASER COMM" && <LaserCommPage sats={sats} />}
-              {tab === "INTEL"      && <IntelPage     sats={sats} telHistory={telHistory} />}
+              {/* As checagens abaixo precisam usar os IDs exatos em inglês para não quebrar a navegação */}
+              {tab === "CONTROLO"    && <ControlPage   sats={sats} telHistory={telHistory} debris={DEBRIS_FIELD} onSelectSat={(s: any) => { setSelected(s); setTab("TELEMETRY"); }} />}
+              {tab === "TELEMETRIA"  && <TelemetryPage sats={sats} selectedSat={selectedSat} onSelectSat={setSelected} />}
+              {tab === "DETRITOS"     && <DebrisPage    debris={DEBRIS_FIELD} />}
+              {tab === "MOTOR IA"  && <AIEnginePage  sats={sats} />}
+              {tab === "COMUNICAÇÃO LASER" && <LaserCommPage sats={sats} />}
+              {tab === "INFORMAÇÃO"      && <IntelPage     sats={sats} telHistory={telHistory} />}
             </motion.div>
           </AnimatePresence>
         </motion.div>

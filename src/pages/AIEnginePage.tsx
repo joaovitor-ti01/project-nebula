@@ -9,7 +9,7 @@ import { PulseDot } from "../components/ui/PulseDot";
 
 export function AIEnginePage({ sats }: any) {
   const [msgs, setMsgs] = useState([
-    { role: "ai", text: "NEBULA AI PREDICTIVE ENGINE — ONLINE\n\nI am the autonomous orbital intelligence aboard PROJECT NEBULA. I monitor satellite health, predict orbital instabilities, calculate collision risks, and execute correction burns autonomously.\n\nAll systems nominal. 5 satellites under active supervision. Ask me anything about the mission." }
+    { role: "ai", text: "MOTOR PREDITIVO DE IA NEBULA — ONLINE\n\nEu sou a inteligência orbital autónoma a bordo do PROJECT NEBULA. Monitorizo a integridade dos satélites, prevejo instabilidades orbitais, calculo riscos de colisão e executo queimas de correção de forma autónoma.\n\nTodos os sistemas nominais. 5 satélites sob supervisão ativa. Pergunte-me qualquer coisa sobre a missão." }
   ]);
   const [input,   setInput]   = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,19 +27,19 @@ export function AIEnginePage({ sats }: any) {
       const reply = await queryNebulaAI(history, sats);
       setMsgs(p => [...p, { role: "ai", text: reply }]);
     } catch {
-      setMsgs(p => [...p, { role: "ai", text: "COMM LINK DISRUPTED. Signal lost. Attempting re-acquisition..." }]);
+      setMsgs(p => [...p, { role: "ai", text: "LINK DE COMUNICAÇÃO INTERROMPIDO. Sinal perdido. A tentar nova aquisição..." }]);
     }
     setLoading(false);
   }, [input, loading, msgs, sats]);
 
   return (
     <div style={{ padding: "66px 20px 32px", maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", height: "calc(100vh - 54px)" }}>
-      <SLabel color={C.purple2}>AI PREDICTIVE ENGINE — NEBULA CONSCIOUSNESS</SLabel>
+      <SLabel color={C.purple2}>MOTOR PREDITIVO DE IA — CONSCIÊNCIA NEBULA</SLabel>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, marginBottom: 14 }}>
         {[
-          ["AI PREDICTIONS MADE", "1,284", C.purple2],
-          ["CORRECTION BURNS",    "47",    C.blue],
-          ["ACCURACY RATE",       "99.7%", C.green],
+          ["PREVISÕES DE IA REALIZADAS", "1,284", C.purple2],
+          ["QUEIMAS DE CORREÇÃO",    "47",    C.blue],
+          ["TAXA DE PRECISÃO",       "99.7%", C.green],
         ].map(([l, v, c]) => (
           <Panel key={l} style={{ padding: "10px 14px" }}>
             <div style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 8, color: C.textLo, marginBottom: 4 }}>{l}</div>
@@ -59,7 +59,7 @@ export function AIEnginePage({ sats }: any) {
                   {m.role === "ai" && (
                     <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
                       <PulseDot color={C.purple2} size={5} />
-                      <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 8, color: C.purple2, letterSpacing: "0.2em" }}>NEBULA AI ENGINE</span>
+                      <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 8, color: C.purple2, letterSpacing: "0.2em" }}>MOTOR DE IA NEBULA</span>
                     </div>
                   )}
                   <div style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 11, color: m.role === "ai" ? C.text : "#7aabcc", lineHeight: 1.9, whiteSpace: "pre-line" }}>
@@ -72,14 +72,14 @@ export function AIEnginePage({ sats }: any) {
           {loading && (
             <motion.div animate={{ opacity: [.3, 1, .3] }} transition={{ repeat: Infinity, duration: 1.1 }}
               style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 9, color: C.purple2, letterSpacing: "0.2em" }}>
-              ◈ AI ENGINE PROCESSING...
+              ◈ MOTOR DE IA A PROCESSAR...
             </motion.div>
           )}
           <div ref={endRef} />
         </div>
         <div style={{ padding: "10px 18px 14px", display: "flex", gap: 10 }}>
           <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()}
-            placeholder="Query the AI predictive engine..."
+            placeholder="Consulte o motor preditivo de IA..."
             style={{ flex: 1, background: "rgba(2,4,8,.9)", border: `1px solid ${C.border}`, borderRadius: 2,
               padding: "10px 14px", fontFamily: "'Share Tech Mono',monospace", fontSize: 11, color: C.text, outline: "none" }} />
           <button onClick={send} disabled={loading} style={{
@@ -87,7 +87,7 @@ export function AIEnginePage({ sats }: any) {
             padding: "10px 18px", fontFamily: "'Share Tech Mono',monospace", fontSize: 9, color: "#fff",
             letterSpacing: "0.15em", cursor: loading ? "not-allowed" : "pointer", transition: "all .2s",
             boxShadow: loading ? "none" : `0 0 12px ${C.purple}80`,
-          }}>TRANSMIT</button>
+          }}>TRANSMITIR</button>
         </div>
       </Panel>
     </div>

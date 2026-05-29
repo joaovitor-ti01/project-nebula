@@ -17,19 +17,28 @@ const LINKS = [
 
 const linkCol = (s: string) => s === "ACTIVE" ? C.cyan : s === "PARTIAL" ? C.orange : C.red;
 
+const translateLinkStatus = (status: string) => {
+  switch (status) {
+    case "ACTIVE": return "ATIVO";
+    case "PARTIAL": return "PARCIAL";
+    case "DEGRADED": return "DEGRADADO";
+    default: return status;
+  }
+};
+
 export function LaserCommPage({ sats }: any) {
   return (
     <div style={{ padding: "66px 20px 32px", maxWidth: 1100, margin: "0 auto" }}>
-      <SLabel>LASER OPTICAL COMMUNICATION NETWORK</SLabel>
+      <SLabel>REDE DE COMUNICAÇÃO ÓTICA LASER</SLabel>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <Panel glow accent={C.cyan} style={{ height: 420 }}>
-          <div style={{ padding: "14px 18px 0" }}><SLabel color={C.cyan}>NETWORK TOPOLOGY</SLabel></div>
+          <div style={{ padding: "14px 18px 0" }}><SLabel color={C.cyan}>TOPOLOGIA DE REDE</SLabel></div>
           <div style={{ height: 360 }}><LaserCommCanvas sats={sats} /></div>
         </Panel>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <Panel>
             <PanelInner>
-              <SLabel color={C.cyan}>ACTIVE LINKS</SLabel>
+              <SLabel color={C.cyan}>LINKS ATIVOS</SLabel>
               {LINKS.map(l => (
                 <div key={`${l.a}-${l.b}`} style={{ padding: "10px 0", borderBottom: `1px solid ${C.dim}` }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
@@ -39,7 +48,7 @@ export function LaserCommPage({ sats }: any) {
                         {l.a} ↔ {l.b}
                       </span>
                     </div>
-                    <Tag color={linkCol(l.status)}>{l.status}</Tag>
+                    <Tag color={linkCol(l.status)}>{translateLinkStatus(l.status)}</Tag>
                   </div>
                   <div style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 8, color: C.textLo }}>
                     BW: {l.bw} · LAT: {l.lat} · PROTO: {l.proto}
@@ -50,12 +59,12 @@ export function LaserCommPage({ sats }: any) {
           </Panel>
           <Panel>
             <PanelInner>
-              <SLabel>NETWORK STATS</SLabel>
+              <SLabel>ESTATÍSTICAS DE REDE</SLabel>
               {[
-                ["TOTAL BANDWIDTH", "83 Gbps", C.cyan],
-                ["AVG LATENCY",     "1.8ms",   C.blue],
-                ["UPTIME (30D)",    "99.2%",   C.green],
-                ["PACKETS SENT",    "8.4B",    C.text],
+                ["LARGURA DE BANDA TOTAL", "83 Gbps", C.cyan],
+                ["LATÊNCIA MÉDIA",     "1.8ms",   C.blue],
+                ["TEMPO DE ATIVIDADE (30D)",    "99.2%",   C.green],
+                ["PACOTES ENVIADOS",    "8.4B",    C.text],
               ].map(([l, v, c]) => (
                 <div key={l} style={{ display: "flex", justifyContent: "space-between", padding: "7px 0", borderBottom: `1px solid ${C.dim}` }}>
                   <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 9, color: C.textLo }}>{l}</span>

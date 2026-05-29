@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { BOOT_LINES } from "../../constants/satellite";
 import { C } from "../../constants/theme";
 import { Particles } from "./Particles";
@@ -33,9 +33,9 @@ export function Boot({ onDone }: BootProps) {
       <Particles />
       <div style={{ position: "relative", zIndex: 10, width: "min(640px,90vw)" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <OrbitronText size={22} color={C.blue}>PROJECT NEBULA</OrbitronText>
+          <OrbitronText size={22} color={C.blue}>PROJETO NEBULA</OrbitronText>
           <div style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 9, color: C.textLo, letterSpacing: "0.3em", marginTop: 6 }}>
-            AUTONOMOUS ORBITAL INTELLIGENCE SYSTEM
+            SISTEMA DE INTELIGÊNCIA ORBITAL AUTÓNOMO
           </div>
         </div>
         <Panel glow>
@@ -53,7 +53,7 @@ export function Boot({ onDone }: BootProps) {
             {done && (
               <motion.div animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 1 }}
                 style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 9, color: C.blue, marginTop: 8, letterSpacing: "0.2em" }}>
-                ▶ ENTERING MISSION CONTROL...
+                ▶ ENTRANDO NO CONTROLO DE MISSÃO...
               </motion.div>
             )}
           </PanelInner>
