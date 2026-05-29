@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BOOT_LINES } from "../../constants/satellites";
+import { BOOT_LINES } from "../../constants/satellite";
 import { C } from "../../constants/theme";
 import { Particles } from "./Particles";
 import { Panel } from "../ui/Panel";

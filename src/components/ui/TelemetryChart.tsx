@@ -17,7 +17,7 @@ export function TelemetryChart({ data, dataKey, color, label }: any) {
             <XAxis dataKey="t" hide />
             <YAxis domain={[0, 100]} hide />
             <Tooltip contentStyle={{ background: C.bg2, border: `1px solid ${C.border}`, color, fontFamily: "monospace", fontSize: 10 }}
-              formatter={(v: number) => [`${Math.round(v)}%`, label]} />
+              formatter={(v) => [`${Math.round(Number(v) || 0)}%`, label]} />
             <Area type="monotone" dataKey={dataKey} stroke={color} strokeWidth={1.5} fill={`url(#g-${dataKey})`} dot={false} isAnimationActive={false} />
           </AreaChart>
         </ResponsiveContainer>

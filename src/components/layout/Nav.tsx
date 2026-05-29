@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { C } from "../../constants/theme";
-import { TABS } from "../../constants/satellites";
+import { TABS } from "../../constants/satellite";
 import { OrbitronText } from "../ui/OrbitronText";
 import { AlertBar } from "./AlertBar";
 import { useClock } from "../../hooks/useClock";
